@@ -226,18 +226,29 @@ To determine the effectiveness for the two methods on the Boston dataset I again
 </p>
 
 # Final Results
-- Compare against each other
-- suriprising MSE larger in boston but MAE lower
+As a reminder, the project produced the following results:
+
+Cars dataset:
+- Locally Weighted Regression: **MSE: 16.994, MAE: 3.005**
+- Boosted Lowess Regression:   **MSE: 17.770, MAE: 3.055**
+
+
+Boston Housing dataset:
+- Locally Weighted Regression: **MSE: 17.893, MAE: 2.664**
+- Boosted Lowess Regression:   **MSE: 18.261, MAE: 2.648**
+
+One of the most interesting things I found is that the Boston Housing dataset produced a larger MSE than the Cars dataset in both cases, but at the same time produced a smaller MAE in both cases. This ins't unheard of since MSE and MAE are different metrics, but I believe it highlights the importance of choosing a good cost function. In the case of the Boston Housing data, optimizing for MSE would suggest the Locally Weighted Regression performs better, while optimizing for MAE would suggest the Boosted Lowess Regression is slightly more effective for the data. I decided to look at the sum of the MSE and MAE for analyzing the effectiveness of the regression methods, and the results are shown in the graph below. **For this particular project where I decided to try and minimize the sum of the MSE and MAE values, the Locally Weighted Reression without Boosting appears to be performing the best**.
+
 <p align="center">
   <img src="mixed.png"/>
 </p>
 
-**In the case of these datasets, the Locally Weighted Reression without Boosting appears to be performing the best**.
 
 # Conclusion
-I was surprised through theoretical and class expectations
- - Highlihts that there is no universal laws, always good to try a couple methods - may perform better on other datasets
- - Could have to do with the way I selected features
- - Perhaps randomness had to do with it as well, maybe random seeds would result in different results
- - why did it perform better in both cases in cars dataset
- - Lowess seems to perform better in this case, but that is not to say it will always be the case or boosting is useless. 
+
+Based on my theoretical expectations and the results we have seen in class, I was surprised to see the normal Locally Weighted Regression performing as well and betetr than the Boosted Lowess Regression in most cases. The choice of a cost function is important, as trying to minimize the MAE would indicate the Boosted Lowess Regression performed better on the Boston Housing data; However, this was the only metric where Boosted Lowess Regression outperformed the Locally Weighted Regression. These shocking results showcase that there are no universal laws when it comes to data science. Although we may expect a given method to perform better than another in most situations, you can never be sure until you test them out on the data. The variation between datasets and their properties mean some methods will perform betetr on certain datasets and worse on others, so it is always important to test multiple methods on data and see which one is producing the best results. It is entirely possible that the Locally Wieghted Regression is the best method for these datasets, but there also some other potential reasons that require more in-depth analysis that could explain the unexpected results:
+
+- Feature Selection: 
+- Randomness:
+
+**There is no denying that Locally Weighted Regression outperformed the Boosted Lowess Regression in this project with the Cars and Boston Housing data. However, this does not mean that boosting is useless and will perform worse than the normal Locally Weighted Regression in every scenario. The only was to find out for sure is to test the two methods on the individual data you will be exploring**.  
