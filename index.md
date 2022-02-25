@@ -7,7 +7,6 @@ This page investigates the theoretical advantages and disadvantages of multivari
 
 The biggest difference between Multivariate and Univariate Regression Analysis is the number of features in the input data. For Univariate Regression, only one features is used, but in Multivariate Regression multiple features (2+) are used for the input data. This means the following equation still holds:
 
-$$\beta$$
 <p align="center">
     <img src="https://render.githubusercontent.com/render/math?math=\Large y = (X\cdot\beta) %2B (\sigma\epsilon)">
 </p>
