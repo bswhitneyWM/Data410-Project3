@@ -85,7 +85,7 @@ def boosted_lwr(X, y, xnew, kern, tau, intercept):
     return output  
 ```
 
-Data was split into training and testing splits to be used in determining the best hyperparamters for the Locally Weighted Regression. I used a `random_state = 13` to ensure my results were reproducible. The `test_size` was set to 0.25 so 75% of the observations would be used to train the model and 25% would be used to validate the results. The code for this is shown below: 
+Data was split into training and testing splits to be used in determining the best hyperparamters for the Locally Weighted Regression. I used a `random_state = 13` to ensure my results were reproducible. The `test_size` was set to 0.25, so 75% of the observations would be used to train the model and 25% would be used to validate the results. The code for this is shown below: 
 
 ```python
 # Split the data for parameter selection
@@ -95,10 +95,7 @@ Xtrain_boston, Xtest_boston, ytrain_boston, ytest_boston = tts(Xboston, yboston,
 
 ### Regression Analysis
 
-- What parameters to scan
-- Why we used sum of MSE and MAE
-- HOW I did both methods at once
-
+The first step I took was to determine the best hyperparameters for both the Locally Weighted Regression and Boosted Lowess Regression. In particular, I decided to investigate the ideal kernel and tau values. For the kernels, Tricubic, Epanechnikov, and Quartic were the three options. For the tau value, I checked every value between 0.1 and 2.1 (Exclsuive) incrementing by 0.1 each time. To determine the best hyperparameters, I calculated the MSE and MAE for every combination of the kernel and tau for each method. If the sum of the MSE and MAE for the method (i.e. Locally Weighted Regression or Boosted Lowess Regression) was smaller than the current lowest score, the current kernel and tau value would be saved as the ideal parameters. I chose to use the sum of the MSE and MAE instead of either one individually because both values are used in evaluating the success of the Locally Weighted Regression and Boosted Lowess Regression, so they should both play a role in determining the hyperparamters. While a small nuance, it is important to note that I normalized the input data, as it is usually best practice when performing regressions. The code for the hyperparmeter selection is shown below. 
 
 ```python
 # Parameters to scan
@@ -140,8 +137,11 @@ for kern in kernels:
 print(f'Best parameters for LWR are kern = {best_params_lwr[0]} and tau = {best_params_lwr[1]} for the Cars Dataset') 
 print(f'Best parameters for Boosted LWR are kern = {best_params_boost[0]} and tau = {best_params_boost[1]} for the Cars Dataset') 
 ```
-- Results (best params for each)
-- Crossvalidation (Why I chose 5 splits, randmo seed and shuffle)
+This produced the following results:
+- Best Locally Weihted Regression Hyperparameters: **kernel: Epanechnikov, tau: 0.8**
+- Best Boosted Lowess Regression Hyperparamters:   **kernel: Tricubic,     tau: 0.5**
+
+Next I took these parameters and used them in crossvalidation to determine the crossvalidated MSE and MAE of the cars dataset for both the Locally Weighted Regression and Boosted Lowess Regression. I chose to perform 5 splits in the crossvalidation because I wanted to ensure there were sufficient observations in each fold. I chose to shuffle the data and provide a random state so the order which data was entered into the file didn't play a role, but the results would still be reproducible after a random shuffle of the data. I made sure to scale the input data everytime to ensure best practice, and the implementation of crossvalidation is shown below. 
 
 ```python
 # Perform Crossvalidation
@@ -177,9 +177,16 @@ print("Crossvalidated Boosted LWR MSE for cars dataset", np.mean(mse_boost_cars)
 print("Crossvalidated Boosted LWR MAE for cars dataset", np.mean(mae_boost_cars))
 ```
 
-- Results of Crossvalidation 
+Crossvalidation prodcued the following Results:
+- Locally Weighted Regression: **MSE: 16.994, MAE: 3.005**
+- Boosted Lowess Regression:   **MSE: 17.770, MAE: 3.055**
 
 ### Cars Results
+To determine the effectiveness for the two methods on the dataset I decided to look at the sum of the MSE and MAE for each regression algorithm. The Locally Weighted Regression had a total of **19.999** while the Boosted Lowess Regression had a total of **20.825**. This suggests that the Locally Weighted Regression is slightly more competitive than the Boosted Lowess Regression for the Cars dataset. This was a surprising result, but could have resulted from a number of factors that are discussed later in the `Conclusion` section. Below is a graphical representation of the MSE and MAE totals for each regression method. 
+
+<p align="center">
+  <img src="cars.png"/>
+</p>
 
 ## Boston Housing Dataset
 
@@ -191,11 +198,19 @@ For the Boston Housing dataset, the same functions and kernels that were defined
 
 ### Boston Results
 
+<p align="center">
+  <img src="boston.png"/>
+</p>
+
 # Final Results
 - Compare against each other
 
+<p align="center">
+  <img src="mixed.png"/>
+</p>
+
 # Conclusion
 I was surprised through theoretical and class expectations
- - Highlihts that there is no universal laws, always good to try a couple methods
+ - Highlihts that there is no universal laws, always good to try a couple methods - may perform better on other datasets
  - Perhaps randomness had to do with it as well, maybe random seeds would result in different results
  - why did it perform better in both cases in cars dataset
