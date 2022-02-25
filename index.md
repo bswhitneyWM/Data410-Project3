@@ -1,10 +1,28 @@
 # Project 3
-
 This page investigates the theoretical advantages and disadvantages of multivariate regression analysis and boosting algorithims, and describes the analysis completed on the cars and Boston housing datasets using each of the methods. 
 
 # Theroetical Discussion
 
 ## Multivariate Regression Analysis
+
+The biggest difference between Multivariate and Univariate Regression Analysis is the number of features in the input data. For Univariate Regression, only one features is used, but in Multivariate Regression multiple features (2+) are used for the input data. This means the following equation still holds:
+
+<p align="center">
+<img src="http://www.sciweavers.org/tex2img.php?eq=y%20%3D%20%28X%5Ccdot%5Cbeta%29%20%2B%20%28%5Csigma%5Cepsilon%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=">
+</p>
+
+But the major difference is that X consists of multiple features, so it can be written as:
+
+<p align="center">
+<img src="http://www.sciweavers.org/tex2img.php?eq=y%3DX_1%5Cbeta_1%20%2B%20X_2%5Cbeta_2%20%2B%20%5Ccdots%20%2B%20X_n%5Cbeta_n%20%2B%20%5Csigma%5Cepsilon&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=">
+</p>
+
+Where X consists of the features, y is the dependent variable, and beta represents the weights. The goal is to find the weights that optimize this equation and minimize the amount of error. In the studies presented below, I used the sum of mean squared error (MSE) and mean absolute error (MAE) to measure the effectiveness of the weight parameters. One important thing to note is that
+
+<p align="center">
+<img src="http://www.sciweavers.org/tex2img.php?eq=E%28%5Csigma%5Cepsilon%29%20%3D%20%200&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=">
+</p>
+So this term can be ignored when solving for the weights in the Locally Weighted Regression. This is intended to describe the changes that occur when working with Multivariate data, so for an in-depth discussion on how Locally Weighted Regression works please see the `Theoretical Discussion` section on my Project2 page: https://bswhitneywm.github.io/Data410-Project2
 
 ## Gradient Boosting
 
