@@ -1,37 +1,29 @@
-## Welcome to GitHub Pages
+# Project 3
 
-You can use the [editor on GitHub](https://github.com/bswhitneyWM/Data410-Project3/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This page investigates the theoretical advantages and disadvantages of multivariate regression analysis and boosting algorithims, and describes the analysis completed on the cars and Boston housing datasets using each of the methods. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# Theroetical Discussion
 
-### Markdown
+## Multivariate Regression Analysis
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Gradient Boosting
 
-```markdown
-Syntax highlighted code block
+## Extreme Gradient Boosting (xgboost)
 
-# Header 1
-## Header 2
-### Header 3
+# Analysis
 
-- Bulleted
-- List
+## Cars Dataset
 
-1. Numbered
-2. List
+### Multivariate Locally Weighted Regression
 
-**Bold** and _Italic_ and `Code` text
+### Boosted Regression
 
-[Link](url) and ![Image](src)
-```
+## Boston Housing Dataset
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+### Multivariate Locally Weighted Regression
 
-### Jekyll Themes
+### Boosted Regression
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/bswhitneyWM/Data410-Project3/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+# Results
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Conclusion
