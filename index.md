@@ -22,7 +22,7 @@ Where X consists of the features, y is the dependent variable, and beta represen
 <p align="center">
 <img src="http://www.sciweavers.org/tex2img.php?eq=E%28%5Csigma%5Cepsilon%29%20%3D%20%200&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=">
 </p>
-So this term can be ignored when solving for the weights in the Locally Weighted Regression. This is intended to describe the changes that occur when working with Multivariate data, so for an in-depth discussion on how Locally Weighted Regression works please see the `Theoretical Discussion` section on my Project2 page: https://bswhitneywm.github.io/Data410-Project2
+So this term can be ignored when solving for the weights in the Locally Weighted Regression. This is intended to describe the changes that occur when working with Multivariate data, so for an in-depth discussion on how Locally Weighted Regression works please see the `Theoretical Discussion` section on my [Project2 page](https://bswhitneywm.github.io/Data410-Project2)
 
 ## Gradient Boosting
 
