@@ -27,3 +27,6 @@ This page investigates the theoretical advantages and disadvantages of multivari
 # Results
 
 # Conclusion
+I was surprised
+ - Highlihts that there is no universal laws, always ood to try a couple methods
+ - Perhaps randomness had to do with it as well, maybe random seeds would result in different results
