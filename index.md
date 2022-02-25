@@ -194,9 +194,32 @@ For the Boston Housing dataset, the same functions and kernels that were defined
 
 ### Feature Selection
 
+I made the executive decision to remove some features from the Boston Housing data analysis. In particular, I removed *Longitude*, *Latitude*, *Town*, and *Tract*. I also decided to change *river* from yes/no to 0/1 values. My explanation for each decision and the code implementation are shown below:
+- Longitude/Latitude: While it is a number, the number is a location and only has significant meaning when put into the context of the earth. 
+- Town: This is categorical data and would be extremely difficult to convert into numerical data. While it probably contributes to the price of houses, it is very difficult to use in regressions. 
+- Tract: Similar to *Town*, this is more categorical data that is extremely difficult to implement into regression algorithms. 
+- River: I think having a river nearby could impact the price of houses. Since there are only 2 possibel values (yes/no), I decided to map them to 1/0 so the variable could be implemented in the regression. 
+
+```python
+# Import Boston Housing dataset
+boston = pd.read_csv('Data/Boston Housing Prices.csv')
+
+# Remove or convert categorical data 
+Xboston = boston.drop(columns=['longitude', 'latitude', 'town', 'tract', 'cmedv'])
+Xboston['river'] = Xboston['river'].map({'yes':1, 'no': 0})
+Xboston = Xboston.values
+
+yboston = boston['cmedv'].values
+```
 ### Regression Analysis
+The first step was to determine the best hyperparameters for both the Locally Weighted Regression and the Boosted Lowess Regression. These hyperparameters were then used to calculate the crossvalidated MSE and MAE. For crossvalidation 5 splits were used again to ensure sufficient observations in every fold. The data was first shuffled to ensure the order of data entry didn't play a role in the results, but a random state was also used to ensure reproducible results. Since this process was the same as I used for the Cars dataset, please see the `Regression Analysis` section under the Cars dataset for a detailed look at the code. The only difference between the two is the data that was used. 
+
+Crossvalidation prodcued the following Results:
+- Locally Weighted Regression: **MSE: 17.893, MAE: 2.664**
+- Boosted Lowess Regression:   **MSE: 18.261, MAE: 2.648**
 
 ### Boston Results
+To determine the effectiveness for the two methods on the Boston dataset I again decided to look at the sum of the MSE and MAE for each regression algorithm. The Locally Weighted Regression had a total of **20.557** while the Boosted Lowess Regression had a total of **20.909**. This suggests that the normal Locally Weighted Regression is performing slightly betetr on the Boston Housing dataset than the boosted version. This is emphasized in the graphical representation below as well. Potential reasons for this are discussed in the `Conclusion` section. 
 
 <p align="center">
   <img src="boston.png"/>
@@ -204,13 +227,17 @@ For the Boston Housing dataset, the same functions and kernels that were defined
 
 # Final Results
 - Compare against each other
-
+- suriprising MSE larger in boston but MAE lower
 <p align="center">
   <img src="mixed.png"/>
 </p>
 
+**In the case of these datasets, the Locally Weighted Reression without Boosting appears to be performing the best**.
+
 # Conclusion
 I was surprised through theoretical and class expectations
  - Highlihts that there is no universal laws, always good to try a couple methods - may perform better on other datasets
+ - Could have to do with the way I selected features
  - Perhaps randomness had to do with it as well, maybe random seeds would result in different results
  - why did it perform better in both cases in cars dataset
+ - Lowess seems to perform better in this case, but that is not to say it will always be the case or boosting is useless. 
