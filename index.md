@@ -38,7 +38,7 @@ Gradient Boosting is a process that can be used to try and improve the accuracy 
 
 By adding **F** to both sides...
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large F(X_i) + h(X_i) = y_i">
+<img src="https://render.githubusercontent.com/render/math?math=\Large F(X_i) %2B h(X_i) = y_i">
 </p>
 
 This leads to a new regressor that is defined by **F + h**. It has been shown that the new regressor **F + h** is more liekly to perform better than the old regressor **F**. This stems from the idea that multiple weak learners combined together can create a single strong learner.  
