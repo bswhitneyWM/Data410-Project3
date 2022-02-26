@@ -26,6 +26,23 @@ So this term can be ignored when solving for the weights in the Locally Weighted
 
 ## Gradient Boosting
 
+Gradient Boosting is a process that can be used to try and improve the accuracy of learners in regression and classification problems. While it is possible to apply it to ranking problems as well, this is extremely difficult. For the purposes of discussion on this page, we will assume Gradient Boosting is being used in a regression context. At a high level, Gradient Boosting revolves around improving a regressor **F** for the observations of X (where X = X1, X2, ..., Xn). For the regressor, predictions can be represented as: 
+<p align="center">
+<img src="https://render.githubusercontent.com/render/math?math=\Large y=F(X_i)">
+</p>
+
+**One of the key assumptions for Gradient Boosting is that regressor F is regarded as a "weak learner"**. In machine learning, a weak learner is used to describe models that are only slightly better than randomly guessing. On the other hand, strong learners describe models that are more (arbitrarily) accurate in their predictions. To counteract the weak learner, you can train a decision tree **h** such that the new output is:
+<p align="center">
+<img src="https://render.githubusercontent.com/render/math?math=\Large h(X_i) = y_i - F(X_i)">
+</p>
+
+By adding **F** to both sides...
+<p align="center">
+<img src="https://render.githubusercontent.com/render/math?math=\Large F(X_i) + h(X_i) = y_i">
+</p>
+
+This leads to a new regressor that is defined by **F + h**. It has been shown that the new regressor **F + h** is more liekly to perform better than the old regressor **F**. This stems from the idea that multiple weak learners combined together can create a single strong learner.  
+
 ## Extreme Gradient Boosting (xgboost)
 
 # Analysis
@@ -266,7 +283,8 @@ One of the most interesting things I found is that the Boston Housing dataset pr
 
 Based on my theoretical expectations and the results we have seen in class, I was surprised to see the normal Locally Weighted Regression performing as well and betetr than the Boosted Lowess Regression in most cases. The choice of a cost function is important, as trying to minimize the MAE would indicate the Boosted Lowess Regression performed better on the Boston Housing data; However, this was the only metric where Boosted Lowess Regression outperformed the Locally Weighted Regression. These shocking results showcase that there are no universal laws when it comes to data science. Although we may expect a given method to perform better than another in most situations, you can never be sure until you test them out on the data. The variation between datasets and their properties mean some methods will perform betetr on certain datasets and worse on others, so it is always important to test multiple methods on data and see which one is producing the best results. It is entirely possible that the Locally Wieghted Regression is the best method for these datasets, but there also some other potential reasons that require more in-depth analysis that could explain the unexpected results:
 
-- Feature Selection: For the Boston Housing data I removed some features that may have contributed to the price of houses such as the location of the house (Whether it be Longitude/Latitude or the Town). Perhaps including these features in the analysis would produce slihtly different results, or removing more features that don't contribute as much. I chose the features to use based on what I felt made sense and didn't require tons of data manipulation, but there are far more advanced feature selection techniques I could have explored if there was more time. 
-- Randomness: It is always possible that Random Seeds impact the results of experiments. They have the reat beenfit of making the work reproducible, but the choice of the random seed can have a big impact. Choosing a different random seed would result in different crossvalidated MSE and MAE values, and maybe change how well either of the regression methods perform. In an ideal world, I would test multiple different random seeds and average the results together for even stronger results. 
+- *Locally Weighted Regression Learning Strength*: It is possible that the Locally Weighted Regression can be considered a strong learner in the case of these data sets. We know that Gradient Boosting is very effective fr improving the accuracy of weak learners, but when it comes to strong learners Gradient Boosting may only lead to the model becoming overfit. Overfitting will ultimately lead to worse results because it will perform poorly on the testing sets. This would require some more in-depth analysis to confirm or deny this hypothesis.  
+- *Feature Selection*: For the Boston Housing data I removed some features that may have contributed to the price of houses such as the location of the house (Whether it be Longitude/Latitude or the Town). Perhaps including these features in the analysis would produce slihtly different results, or removing more features that don't contribute as much. I chose the features to use based on what I felt made sense and didn't require tons of data manipulation, but there are far more advanced feature selection techniques I could have explored if there was more time. 
+- *Randomness*: It is always possible that Random Seeds impact the results of experiments. They have the reat beenfit of making the work reproducible, but the choice of the random seed can have a big impact. Choosing a different random seed would result in different crossvalidated MSE and MAE values, and maybe change how well either of the regression methods perform. In an ideal world, I would test multiple different random seeds and average the results together for even stronger results. 
 
 There are many more factors and validation techniques that I could use to strengthen the results of the experiment, but their simply isn't enough time to go in-depth with every potential error source. **There is no denying that Locally Weighted Regression outperformed the Boosted Lowess Regression in this project with the Cars and Boston Housing data. However, this does not mean that boosting is useless and will perform worse than the normal Locally Weighted Regression in every scenario. The only was to find out for sure is to test the two methods on the individual data you will be exploring**.  
