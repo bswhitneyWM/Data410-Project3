@@ -44,34 +44,8 @@ By adding **F** to both sides...
 This leads to a new regressor that is defined by **F + h**. It has been shown that the new regressor **F + h** is more liekly to perform better than the old regressor **F**. This stems from the idea that multiple weak learners combined together can create a single strong learner.  
 
 ## Extreme Gradient Boosting (XGBoost)
-XGBoost is similar to Gradient Boosting in the fact it tries to combine weak learners to make a strong learner in the end. Unlike Gradient Boosting, it uses regularization parameters to prevent overfitting, such as the learning rate. For the initial weak learner, XGBoost just makes arbitrary predictions, such as the average of all the values, and calculates the residuals.
 
-**Redisuals = Actual Value - Predicted Value**
-
-Once the residuals are calculated, it is time to determine the best linear split along the features. A split will result in a decision tree with a conditional in the root and all the residuals to the left of the split in the left leaf node and all the other residuals in the right leaf node. To compare splits, the improvement in accuracy brought by each split is calculated using the idea of Gain. The formula is below:
-<p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large Gain = \frac{G^2_L}{H_L %2B \lambda} %2B \frac{G^2_R}{H_R %2B \lambda} - \frac{(G_L + G_R)^2}{H_L %2B H_R %2B \lambda} - \gamma">
-</p>
-Where  
-
-**G_L = sum of residuals in left leaf**  
-**G_R = sum of residuals in right leaf**  
-**H_L = # of residuals in left leaf**  
-**H_R = # of residuals in right leaf**  
-**Lambda = Hyperparameter to control the sensitivity to individual observations**  
-**Gamma = Hyperparameter controlling the minimum loss reduction required to make a further partition on a leaf node of the tree**  
-
-
-The goal is to choose the split that maximizes the gain, as this will lead to the split that increases the accuracy the most. A negative gain indicates the split does not improve results compared to leaving the tree untouched. This process is repeated on both of the leaves until a tree is created where no more increases in accuracy can be made. In other words, until all the splits at a given leaf node result in neative gain. Once this happens, we are left with a decision tree that can be used for prediction. Since the leaves contain residuals and predictions must return a single scalar value, they are calculated with the following formula where **r**. 
-<p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large Pred = \frac{\Sigma residuals}{%23residuals %2B \lambda}">
-</p>
-
-New predictions are then made with the following formula, which are used to create a set of new residuals. 
-
-**Prediction = Initial Prediction + Leanring Rate * Prediction**
-
-We repeat the same process described above with the new residuals to create a new decision tree. This process is repeated a number of times (until the max number is reached or by default 100) to produce a stronger learner. This is because a bunch of weak learners with slow improvements will combine to make a strong learner with accurate predictions in the end. At the end, the XGBoost model makes predictions by summing the initial predictions and the predictions made by each individual tree multipled by the learning rate. 
+Chicken
 
 # Analysis
 
