@@ -71,7 +71,7 @@ New predictions are then made with the following formula, which are used to crea
 
 **Prediction = Initial Prediction + Leanring Rate * Prediction**
 
-We repeat the same process described above with the new residuals to create a new decision tree. This process is repeated a number of times (until the max number is reached or by default 100) to produce a stronger learner. This is because a bunch of weak learners with slow improvements will combine to make a strong learner with accurate predictions in the end. At the end, the XGBoost model makes predictions by summing the initial predictions and the predictions made by each individual tree multipled by the learning rate. An in depth explanation and Python example can be found on [this page](https://towardsdatascience.com/xgboost-python-example-42777d01001e). 
+We repeat the same process described above with the new residuals to create a new decision tree. This process is repeated a number of times (until the max number is reached or by default 100) to produce a stronger learner. This is because a bunch of weak learners with slow improvements will combine to make a strong learner with accurate predictions in the end. At the end, the XGBoost model makes predictions by summing the initial predictions and the predictions made by each individual tree multipled by the learning rate. 
 
 # Analysis
 
