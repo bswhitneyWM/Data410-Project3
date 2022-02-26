@@ -66,7 +66,7 @@ Where
 
 The goal is to choose the split that maximizes the gain, as this will lead to the split that increases the accuracy the most. A negative gain indicates the split does not improve results compared to leaving the tree untouched. This process is repeated on both of the leaves until a tree is created where no more increases in accuracy can be made. In other words, until all the splits at a given leaf node result in neative gain. Once this happens, we are left with a decision tree that can be used for prediction. Since the leaves contain residuals and predictions must return a single scalar value, they are calculated with the following formula where **r**. 
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=\Large Pred = \frac{\Sigma residuals}{%23residuals %2B \lambda}">
+<img src="https://render.githubusercontent.com/render/math?math=\Large Pred = \frac{\Sigma residuals}{\%23\residuals %2B \lambda}">
 </p>
 
 New predictions are then made with the following formula, which are used to create a set of new residuals. 
